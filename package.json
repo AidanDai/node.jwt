@@ -1,6 +1,6 @@
 {
   "name": "node.jwt",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A lightweight library for encode and decode JSON Web Tokens (JWT).",
   "main": "index.js",
   "scripts": {
