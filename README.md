@@ -5,7 +5,7 @@ A lightweight library for encode and decode JSON Web Tokens (JWT).
 ## Install
 
 ```bash
-$ npm install node.js-jwt
+$ npm install node.jwt
 ```
 
 ## Usage
@@ -42,6 +42,7 @@ console.log(result)
 
 ### Asymmetric encryption
 
+```javascript
 const jwt = require('node.js-jwt')
 const payload = {
   "sub": "1234567890",
@@ -67,6 +68,7 @@ console.log(result)
 //	  "admin": true
 //	}
 //}
+```
 
 ### Interface
 
