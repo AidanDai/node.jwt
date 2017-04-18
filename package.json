@@ -1,0 +1,23 @@
+{
+  "name": "node.jwt",
+  "version": "1.0.0",
+  "description": "A lightweight library for encode and decode JSON Web Tokens (JWT).",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test"
+  },
+  "author": "Aidan aidandai@126.com",
+  "repository": "https://github.com/AidanDai/node.jwt",
+  "homepage": "https://aidandai.github.io/node.jwt",
+  "license": "MIT",
+  "keywords": [
+    "JWT",
+    "Node JWT",
+    "JSON Web Tokens",
+    "Node JSON Web Tokens"
+  ],
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^3.2.0"
+  }
+}
