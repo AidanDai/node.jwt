@@ -14,10 +14,11 @@
   },
   "license": "MIT",
   "keywords": [
+    "node.jwt",
     "JWT",
-    "Node JWT",
+    "node JWT",
     "JSON Web Tokens",
-    "Node JSON Web Tokens"
+    "node JSON Web Tokens"
   ],
   "devDependencies": {
     "expect.js": "^0.3.1",
