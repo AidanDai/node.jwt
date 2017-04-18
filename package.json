@@ -1,6 +1,6 @@
 {
   "name": "node.jwt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A lightweight library for encode and decode JSON Web Tokens (JWT).",
   "main": "index.js",
   "scripts": {
@@ -15,10 +15,10 @@
   "license": "MIT",
   "keywords": [
     "node.jwt",
-    "JWT",
     "node JWT",
-    "JSON Web Tokens",
-    "node JSON Web Tokens"
+    "node JSON Web Tokens",
+    "JWT",
+    "JSON Web Tokens"
   ],
   "devDependencies": {
     "expect.js": "^0.3.1",
