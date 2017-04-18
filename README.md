@@ -2,6 +2,8 @@
 
 A lightweight library for encode and decode JSON Web Tokens (JWT).
 
+[![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
 ## Install
 
 ```bash
