@@ -7,7 +7,7 @@ A lightweight library for encode and decode JSON Web Tokens (JWT).
 ## Install
 
 ```bash
-$ npm install node.jwt
+$ npm install node.jwt --save-dev
 ```
 
 ## Usage
