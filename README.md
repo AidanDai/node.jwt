@@ -15,7 +15,7 @@ $ npm install node.jwt --save-dev
 ### Symmetric encryption
 
 ```javascript
-const jwt = require('node.js-jwt')
+const jwt = require('node.jwt')
 const payload = {
   "sub": "1234567890",
   "name": "John Doe",
