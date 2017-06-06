@@ -46,8 +46,8 @@ describe('encode', function() {
 	it('encode token with hamc algorithm and default param',function() {
 		const secret = jwt.secret('I am a secret')
 		const payload = {
-			nbf: true,
-			exp: Date.now() + 1000 * 60 * 60 * 24 * 2,
+			nbf: Date.now()/1000 - (60 * 5),
+			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
 			uid: 1,
 			authorization: 'authorization'
 		}
@@ -60,8 +60,8 @@ describe('encode', function() {
 	it('encode token with hamc algorithm',function() {
 		const secret = jwt.secret('I am a secret')
 		const payload = {
-			nbf: true,
-			exp: Date.now() + 1000 * 60 * 60 * 24 * 2,
+			nbf: Date.now()/1000 - (60 * 5),
+			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
 			uid: 1,
 			authorization: 'authorization'
 		}
@@ -80,8 +80,8 @@ describe('encode', function() {
 		const rsaPath = path.resolve(__dirname, './pem/private.pem')
 		const secret = jwt.secret(rsaPath, true)
 		const payload = {
-			nbf: true,
-			exp: Date.now() + 1000 * 60 * 60 * 24 * 2,
+			nbf: Date.now()/1000 - (60 * 5),
+			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
 			uid: 1,
 			authorization: 'authorization'
 		}
@@ -95,8 +95,8 @@ describe('encode', function() {
 		const rsaPath = path.resolve(__dirname, './pem/private.pem')
 		const secret = jwt.secret(rsaPath, true)
 		const payload = {
-			nbf: true,
-			exp: Date.now() + 1000 * 60 * 60 * 24 * 2,
+			nbf: Date.now()/1000 - (60 * 5),
+			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
 			uid: 1,
 			authorization: 'authorization'
 		}
@@ -113,8 +113,8 @@ describe('encode', function() {
 
 	it('throw an error when the secret is missing', function() {
 		const payload = {
-			nbf: true,
-			exp: Date.now() + 1000 * 60 * 60 * 24 * 2,
+			nbf: Date.now()/1000 - (60 * 5),
+			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
 			uid: 1,
 			authorization: 'authorization'
 		}
@@ -125,8 +125,8 @@ describe('encode', function() {
 
   it('throw an error when the specified algorithm is not supported', function() {
 		const payload = {
-			nbf: true,
-			exp: Date.now() + 1000 * 60 * 60 * 24 * 2,
+			nbf: Date.now()/1000 - (60 * 5),
+			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
 			uid: 1,
 			authorization: 'authorization'
 		}
@@ -138,8 +138,8 @@ describe('encode', function() {
 
   it('throw an error when the secret is unvalid', function() {
 		const payload = {
-			nbf: true,
-			exp: Date.now() + 1000 * 60 * 60 * 24 * 2,
+			nbf: Date.now()/1000 - (60 * 5),
+			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
 			uid: 1,
 			authorization: 'authorization'
 		}
@@ -172,8 +172,8 @@ describe('decode', function() {
 
 	it('Unvalid public secret for rsa verify, signature verification failed', function() {
 		const payload = {
-			nbf: true,
-			exp: 1000 * 60 * 60 * 24 * 2,
+			nbf: Date.now()/1000 - (60 * 5),
+			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
 			uid: 1,
 			authorization: 'authorization'
 		}
@@ -190,7 +190,7 @@ describe('decode', function() {
 
 	it('Token expired, signature verification failed', function() {
 		const payload = {
-			exp: 1000,
+			exp: Date.now()/1000 - (60 * 60 * 24 * 2), // NOTE EXP 2 DAYS AGO
 			uid: 1,
 			authorization: 'authorization'
 		}
@@ -203,12 +203,84 @@ describe('decode', function() {
 
 		expect(result).to.be.a('object')
 		expect(result.code).to.equal('007')
-		expect(result.message).to.equal('Token expired, signature verification failed')
+		expect(result.message).to.equal('Token expired, signature verification failed (exp)')
+	})
+
+	it('Token invalid, exp claim malformed', function() {
+		const payload = {
+			exp: 'yesterday', // NOPE, SHOULD BE IN SECONDS SINCE 01-Jan-1970
+			uid: 1,
+			authorization: 'authorization'
+		};
+		const privateRsaPath = path.resolve(__dirname, './pem/private.pem');
+		const publicRsaPath = path.resolve(__dirname, './pem/public.pem');
+		const privateSecret = jwt.secret(privateRsaPath, true);
+		const publicSecret = jwt.secret(publicRsaPath, true);
+		const token = jwt.encode(payload, privateSecret, 'RS256');
+		const result = jwt.decode(token, publicSecret);
+
+		expect(result).to.be.a('object');
+		expect(result.code).to.equal('008');
+		expect(result.message).to.equal('The exp is invalid, the Expiration Time Claim must be a number representing the expiry date/time of this token in seconds since 01-Jan-1970 (see. rfc7519)');
+	})
+
+	it('Token expired, token not yet valid', function() {
+		const payload = {
+			nbf: Date.now()/1000 + (60 * 60 * 24 * 2), // NOTE NBF 2 DAYS IN FUTURE
+			uid: 1,
+			authorization: 'authorization'
+		};
+		const privateRsaPath = path.resolve(__dirname, './pem/private.pem');
+		const publicRsaPath = path.resolve(__dirname, './pem/public.pem');
+		const privateSecret = jwt.secret(privateRsaPath, true);
+		const publicSecret = jwt.secret(publicRsaPath, true);
+    const token = jwt.encode(payload, privateSecret, 'RS256');
+    const result = jwt.decode(token, publicSecret);
+
+		expect(result).to.be.a('object');
+		expect(result.code).to.equal('009');
+		expect(result.message).to.equal('Token not yet valid, signature verification failed (nbf)');
+	})
+
+	it('Token invalid, nbf claim malformed', function() {
+		const payload = {
+			nbf: 'tomorrow', // NOPE, SHOULD BE IN SECONDS SINCE 01-Jan-1970
+			uid: 1,
+			authorization: 'authorization'
+		};
+		const privateRsaPath = path.resolve(__dirname, './pem/private.pem');
+		const publicRsaPath = path.resolve(__dirname, './pem/public.pem');
+		const privateSecret = jwt.secret(privateRsaPath, true);
+		const publicSecret = jwt.secret(publicRsaPath, true);
+		const token = jwt.encode(payload, privateSecret, 'RS256');
+		const result = jwt.decode(token, publicSecret);
+
+		expect(result).to.be.a('object');
+		expect(result.code).to.equal('010');
+		expect(result.message).to.equal('The nbf is invalid, the Not Before Claim must be the number representing the date/time after which this token can be accepted in seconds since 01-Jan-1970 (see. rfc7519)');
+	})
+
+	it('Token invalid, iat claim malformed', function() {
+		const payload = {
+			iat: 'now', // NOPE, SHOULD BE IN SECONDS SINCE 01-Jan-1970
+			uid: 1,
+			authorization: 'authorization'
+		};
+		const privateRsaPath = path.resolve(__dirname, './pem/private.pem');
+		const publicRsaPath = path.resolve(__dirname, './pem/public.pem');
+		const privateSecret = jwt.secret(privateRsaPath, true);
+		const publicSecret = jwt.secret(publicRsaPath, true);
+		const token = jwt.encode(payload, privateSecret, 'RS256');
+		const result = jwt.decode(token, publicSecret);
+
+		expect(result).to.be.a('object');
+		expect(result.code).to.equal('011');
+		expect(result.message).to.equal('The iat is invalid, the Issued At Claim must be the number representing the date/time when the token was created in seconds since 01-Jan-1970 (see. rfc7519)');
 	})
 
 	it('Sha decode successful', function() {
 		const payload = {
-			exp: 100000 * 100000 * 100000,
+			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
 			uid: 1,
 			authorization: 'authorization'
 		}
@@ -224,7 +296,7 @@ describe('decode', function() {
 
 	it('Rsa decode successful', function() {
 		const payload = {
-			exp: 100000 * 100000 * 100000,
+			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
 			uid: 1,
 			authorization: 'authorization'
 		}
