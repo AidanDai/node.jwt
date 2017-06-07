@@ -17,9 +17,16 @@ $ npm install node.jwt --save-dev
 ```javascript
 const jwt = require('node.jwt')
 const payload = {
-  "sub": "1234567890",
-  "name": "John Doe",
-  "admin": true
+  "sub": "aidandai@126.com",
+  "iss": "https://aidandai.github.io",
+  "exp": Date.now() / 1000 + (60 * 60 * 24 * 2),
+  "nbf": Date.now() / 1000 - (60 * 5),
+  "iat": Date.now() / 1000,
+  "data": {
+  	"uid": "1sf72323rjsdfsdkl223434k",
+  	"name": "Aidan",
+  	"authority": "1001111010101110",
+  }
 }
 
 // get secret, you can reload this method to create your secret
@@ -31,25 +38,39 @@ var token = jwt.encode(payload, secret);
 // decode
 var result = jwt.decode(token, secret)
 console.log(result)
-//{
-//	code: '000', // error code of verify, you can learn more from lib/jwt.js
-//	message: 'successful', // error message of verify, , you can learn more from lib/jwt.js
-//	payload: {
-//	  "sub": "1234567890",
-//	  "name": "John Doe",
-//	  "admin": true
-//	}
-//}
+// {
+// 	code: '000', // error code of verify, you can learn more from lib/jwt.js
+// 	message: 'successful', // error message of verify, , you can learn more from lib/jwt.js
+// 	payload: {
+// 	  "sub": "aidandai@126.com",
+// 		  "iss": "https://aidandai.github.io",
+// 		  "exp": Date.now() / 1000 + (60 * 60 * 24 * 2),
+// 		  "nbf": Date.now() / 1000 - (60 * 5),
+// 		  "iat": Date.now() / 1000,
+// 		  "data": {
+// 		  	"uid": "1sf72323rjsdfsdkl223434k",
+// 		  	"name": "Aidan",
+// 		  	"authority": "1001111010101110",
+// 		  }
+// 		}
+// }
 ```
 
 ### Asymmetric encryption
 
 ```javascript
-const jwt = require('node.js-jwt')
+const jwt = require('node.jwt')
 const payload = {
-  "sub": "1234567890",
-  "name": "John Doe",
-  "admin": true
+  "sub": "aidandai@126.com",
+  "iss": "https://aidandai.github.io",
+  "exp": Date.now() / 1000 + (60 * 60 * 24 * 2),
+  "nbf": Date.now() / 1000 - (60 * 5),
+  "iat": Date.now() / 1000,
+  "data": {
+  	"uid": "1sf72323rjsdfsdkl223434k",
+  	"name": "Aidan",
+  	"authority": "1001111010101110",
+  }
 }
 
 const privateSecret = getYourPrivateSceret()
@@ -61,15 +82,22 @@ var token = jwt.encode(payload, privateSecret, 'RS256')
 // decode
 var result = jwt.decode(token, publicSceret)
 console.log(result)
-//{
-//	code: '000', // error code of verify, you can learn more from lib/jwt.js
-//	message: 'successful', // error message of verify, , you can learn more from lib/jwt.js
-//	payload: {
-//	  "sub": "1234567890",
-//	  "name": "John Doe",
-//	  "admin": true
-//	}
-//}
+// {
+// 	code: '000', // error code of verify, you can learn more from lib/jwt.js
+// 	message: 'successful', // error message of verify, , you can learn more from lib/jwt.js
+// 	payload: {
+// 	  "sub": "aidandai@126.com",
+// 		  "iss": "https://aidandai.github.io",
+// 		  "exp": Date.now() / 1000 + (60 * 60 * 24 * 2),
+// 		  "nbf": Date.now() / 1000 - (60 * 5),
+// 		  "iat": Date.now() / 1000,
+// 		  "data": {
+// 		  	"uid": "1sf72323rjsdfsdkl223434k",
+// 		  	"name": "Aidan",
+// 		  	"authority": "1001111010101110",
+// 		  }
+// 		}
+// }
 ```
 
 ### Interface
@@ -110,3 +138,6 @@ jwt.encode(payload, secret, 'HS512')
 - [Introduction to JSON Web Tokens](https://jwt.io/introduction/)
 
 - [JWT(JSON Web Token)](http://self-issued.info/docs/draft-jones-json-web-token.html) 
+##  Contributors
+
+- stephenbeauchamp: [https://github.com/stephenbeauchamp](https://github.com/stephenbeauchamp)

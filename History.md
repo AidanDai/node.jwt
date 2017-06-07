@@ -1,7 +1,12 @@
 # 0.1.1
 
-Current
+first version
 
 # 0.1.2
 
 [Fix Bug for exp](https://github.com/AidanDai/node.jwt/issues/1)
+
+# 0.1.3
+
+- [Fix Support exp, nbf, iat](https://github.com/AidanDai/node.jwt/pull/2)
+- update README.md
