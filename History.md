@@ -10,3 +10,7 @@ first version
 
 - [Fix Support exp, nbf, iat](https://github.com/AidanDai/node.jwt/pull/2)
 - update README.md
+
+# 0.1.4
+
+- update README.md

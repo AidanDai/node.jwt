@@ -8,6 +8,8 @@ A lightweight library for encode and decode JSON Web Tokens (JWT).
 
 ```bash
 $ npm install node.jwt --save-dev
+
+$ yarn add node.jwt
 ```
 
 ## Usage
