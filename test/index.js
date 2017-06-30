@@ -43,7 +43,7 @@ describe('secret', function() {
 })
 
 describe('encode', function() {
-	it('encode token with hamc algorithm and default param',function() {
+	it('encode token with hmac algorithm and default param',function() {
 		const secret = jwt.secret('I am a secret')
 		const payload = {
 			nbf: Date.now()/1000 - (60 * 5),
@@ -57,7 +57,7 @@ describe('encode', function() {
 		expect(token.split('.')).to.have.length(3)
 	})
 
-	it('encode token with hamc algorithm',function() {
+	it('encode token with hmac algorithm',function() {
 		const secret = jwt.secret('I am a secret')
 		const payload = {
 			nbf: Date.now()/1000 - (60 * 5),

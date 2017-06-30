@@ -1,0 +1,23 @@
+To ask questions, raise issues, request enhancements and/or report bugs, please
+visit:
+
+  https://github.com/AidanDai/node.jwt/issues
+
+To contribute code please create a pull request. Here is a good guide for this
+process:
+
+  https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/
+
+For guidance on coding standards preferred by this project please see:
+
+  https://github.com/feross/standard
+
+General information on JWT can be found here:
+
+  http://www.rfc-editor.org/info/rfc7519
+  https://www.rfc-editor.org/rfc/rfc7797.txt
+
+  https://www.rfc-editor.org/info/rfc7797
+  https://www.rfc-editor.org/rfc/rfc7797.txt
+
+  https://jwt.io/
