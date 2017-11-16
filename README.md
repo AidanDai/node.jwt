@@ -25,9 +25,9 @@ const payload = {
   "nbf": Date.now() / 1000 - (60 * 5),
   "iat": Date.now() / 1000,
   "data": {
-  	"uid": "1sf72323rjsdfsdkl223434k",
-  	"name": "Aidan",
-  	"authority": "1001111010101110",
+    "uid": "1sf72323rjsdfsdkl223434k",
+    "name": "Aidan",
+    "authority": "1001111010101110",
   }
 }
 
@@ -40,21 +40,22 @@ var token = jwt.encode(payload, secret);
 // decode
 var result = jwt.decode(token, secret)
 console.log(result)
+
 // {
-// 	code: '000', // error code of verify, you can learn more from lib/jwt.js
-// 	message: 'successful', // error message of verify, , you can learn more from lib/jwt.js
-// 	payload: {
-// 	  "sub": "aidandai@126.com",
-// 		  "iss": "https://aidandai.github.io",
-// 		  "exp": Date.now() / 1000 + (60 * 60 * 24 * 2),
-// 		  "nbf": Date.now() / 1000 - (60 * 5),
-// 		  "iat": Date.now() / 1000,
-// 		  "data": {
-// 		  	"uid": "1sf72323rjsdfsdkl223434k",
-// 		  	"name": "Aidan",
-// 		  	"authority": "1001111010101110",
-// 		  }
-// 		}
+//   code: '000', // error code of verify, you can learn more from lib/jwt.js
+//   message: 'successful', // error message of verify, , you can learn more from lib/jwt.js
+//   payload: {
+//     "sub": "aidandai@126.com",
+//     "iss": "https://aidandai.github.io",
+//     "exp": Date.now() / 1000 + (60 * 60 * 24 * 2),
+//     "nbf": Date.now() / 1000 - (60 * 5),
+//     "iat": Date.now() / 1000,
+//     "data": {
+//       "uid": "1sf72323rjsdfsdkl223434k",
+//       "name": "Aidan",
+//       "authority": "1001111010101110",
+//     }
+//   }
 // }
 ```
 
@@ -69,9 +70,9 @@ const payload = {
   "nbf": Date.now() / 1000 - (60 * 5),
   "iat": Date.now() / 1000,
   "data": {
-  	"uid": "1sf72323rjsdfsdkl223434k",
-  	"name": "Aidan",
-  	"authority": "1001111010101110",
+    "uid": "1sf72323rjsdfsdkl223434k",
+    "name": "Aidan",
+    "authority": "1001111010101110"
   }
 }
 
@@ -84,21 +85,22 @@ var token = jwt.encode(payload, privateSecret, 'RS256')
 // decode
 var result = jwt.decode(token, publicSceret)
 console.log(result)
+
 // {
-// 	code: '000', // error code of verify, you can learn more from lib/jwt.js
-// 	message: 'successful', // error message of verify, , you can learn more from lib/jwt.js
-// 	payload: {
-// 	  "sub": "aidandai@126.com",
-// 		  "iss": "https://aidandai.github.io",
-// 		  "exp": Date.now() / 1000 + (60 * 60 * 24 * 2),
-// 		  "nbf": Date.now() / 1000 - (60 * 5),
-// 		  "iat": Date.now() / 1000,
-// 		  "data": {
-// 		  	"uid": "1sf72323rjsdfsdkl223434k",
-// 		  	"name": "Aidan",
-// 		  	"authority": "1001111010101110",
-// 		  }
-// 		}
+//   code: '000', // error code of verify, you can learn more from lib/jwt.js
+//   message: 'successful', // error message of verify, , you can learn more from lib/jwt.js
+//   payload: {
+//     "sub": "aidandai@126.com",
+//     "iss": "https://aidandai.github.io",
+//     "exp": Date.now() / 1000 + (60 * 60 * 24 * 2),
+//     "nbf": Date.now() / 1000 - (60 * 5),
+//     "iat": Date.now() / 1000,
+//     "data": {
+//       "uid": "1sf72323rjsdfsdkl223434k",
+//       "name": "Aidan",
+//       "authority": "1001111010101110"
+//     }
+//   }
 // }
 ```
 
@@ -135,11 +137,13 @@ The supported algorithms for encoding and decoding are `HS256`, `HS384`, `HS512`
 // encode using HS512
 jwt.encode(payload, secret, 'HS512')
 ```
+
 ### About JWT
 
 - [Introduction to JSON Web Tokens](https://jwt.io/introduction/)
 
-- [JWT(JSON Web Token)](http://self-issued.info/docs/draft-jones-json-web-token.html) 
+- [JWT(JSON Web Token)](http://self-issued.info/docs/draft-jones-json-web-token.html)
+
 ##  Contributors
 
 - stephenbeauchamp: [https://github.com/stephenbeauchamp](https://github.com/stephenbeauchamp)
