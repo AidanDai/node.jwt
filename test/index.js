@@ -170,7 +170,8 @@ describe('decode', function() {
 		expect(result.message).to.equal('Not enough or too many segments')
 	})
 
-	it('Unvalid public secret for rsa verify, signature verification failed', function() {
+	// FIXME: need many test case
+	it('Exception error in rsa verify, signature verification failed', function() {
 		const payload = {
 			nbf: Date.now()/1000 - (60 * 5),
 			exp: Date.now()/1000 + (60 * 60 * 24 * 2),
@@ -185,7 +186,7 @@ describe('decode', function() {
 
 		expect(result).to.be.a('object')
 		expect(result.code).to.equal('006')
-		expect(result.message).to.equal('Unvalid public secret for rsa verify, signature verification failed')
+		expect(result.message).to.equal('Exception error in rsa verify, signature verification failed')
 	})
 
 	it('Token expired, signature verification failed', function() {
